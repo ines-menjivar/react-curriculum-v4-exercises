@@ -10,11 +10,10 @@
 
 import { useState } from 'react';
 export default function BugMutatedState() {
-  let [count, setCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((previous) => previous + 1);
   }
 
   return (
@@ -26,4 +25,7 @@ export default function BugMutatedState() {
 }
 
 // Explanation:
-// (Write your explanation here)
+// We had "let" for the state var but, we use const since React
+// cannot detect direct mutations.
+// Using setCount(previous => previous + 1) creates a new value
+// that React can track- allowing the UI to update correctly.
