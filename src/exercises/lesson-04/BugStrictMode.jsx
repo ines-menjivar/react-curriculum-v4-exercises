@@ -7,9 +7,11 @@ export default function BugStrictMode() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setCount((c) => c + 1);
     }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -21,3 +23,5 @@ export default function BugStrictMode() {
 }
 
 // Write your explanation of how StrictMode helps us catch this bug
+//StrictMode helps us catch this bug by mounting it twice to help us catch bugs in any side effects we apply to our components like setInterval in this case.
+//We were getting an extra number added each time because we failed to clear the interval in between mounts. The empty dependency array ensures the interval is properly removed during the first unmount so only one interval runs.
