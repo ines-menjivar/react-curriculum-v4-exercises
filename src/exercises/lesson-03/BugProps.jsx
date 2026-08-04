@@ -11,12 +11,12 @@
 
   Use the commented "Explanation" section at the bottom of this lesson's components.
 */
-
+import { useState } from 'react';
 export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+  const [message, setMessage] = useState('Hello, ' + name);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
@@ -28,4 +28,6 @@ export default function BugProps({ name = 'friend' }) {
 }
 
 // Explanation:
-// (Write your explanation here)
+//The message was stored in a normal var so React didn't know to track it.
+// By storing the message in state with useState and updating it with setMessage,
+//React can detect the change and re-render the component directly.
