@@ -6,7 +6,8 @@ export default function BugEventPropagation() {
     alert("RED BOX CLICKED ❌ Don't show me!");
   }
 
-  function handleInnerClick() {
+  function handleInnerClick(event) {
+    event.stopPropagation();
     alert('Button Clicked ✅');
   }
 
@@ -22,3 +23,6 @@ export default function BugEventPropagation() {
     </>
   );
 }
+
+//my explanation: Event bubbling caused the button's click to also trigger the red box's click handler.
+// By passing a parameter to the handleInnerClick component and then using it to call the stop propagation method we stop the click from bubbling up so only the inner button's alert runs.
